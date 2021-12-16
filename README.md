@@ -8,20 +8,26 @@
 
 ### PPTP:
 put your user list to ``.env`` . 
+
 ``PPTP_USER_LIST`` format:
 ```
 client    server      secret      acceptable_local_IP_addresses
 ```
+
  example:
  ``PPTP_USER_LIST="user1 * pass2 *\nuser2 * pass2 *\nuser3 * pass3 *"``
+ 
  command:
  ``docker-compose up -d pptp``
 
 ### L2TP:
 put your user list and psk to ``.env`` . 
+
  example:
  ``L2TP_IPSEC_PSK=example``
+ 
 ``L2TP_USER_LIST=[{"login":"user1","password":"pass1"}]``
+
 
  command:
  ``docker-compose up -d l2tp``
@@ -45,7 +51,7 @@ OPENCONNECT_NO_TEST_USER=0
  
 **NOTE:**
  - The ocserv requires the ocpasswd file to start, if `NO_TEST_USER=1` is provided, there will be no ocpasswd created, which will stop the container immediately after start it.
-### User operations
+#### User operations
 
 All the users opertaions happened while the container is running. If you used a different container name other than  `openconnect`, then you have to change the container name accordingly.
 
@@ -74,6 +80,7 @@ The above command will delete the default user  `test`, if you start the instanc
 
 ### MTPROTO:
 set port and number of secrets in ``.env`` . 
+
  example:
  ```
  MTPROTO_PORT=4444
