@@ -1,0 +1,46 @@
+services:
+  pptp:
+    image: mmontagna/docker-vpn-pptp:latest
+    container_name: pptp
+    privileged: true
+    restart: always
+    network_mode: host
+    environment:
+      - client=${PPTP_USER_LIST}
+  l2tp:
+    image: fcojean/l2tp-ipsec-vpn-server:latest
+    container_name: l2tp
+    privileged: true
+    restart: always
+    ports:
+      - 500:500/udp
+      - 4500:4500/udp
+    volumes:
+      - /lib/modules:/lib/modules:ro
+    environment:
+      - VPN_IPSEC_PSK=${L2TP_IPSEC_PSK}
+      - VPN_USER_CREDENTIAL_LIST=${L2TP_USER_LIST}
+  openconnect:
+    image: tommylau/ocserv:latest
+    container_name: openconnect
+    restart: always
+    privileged: true
+    ports:
+      - ${OPENCONNECT_PORT}:443
+      - ${OPENCONNECT_PORT}:443/udp
+    environment:
+      - CA_CN=${OPENCONNECT_CA_CN}
+      - CA_ORG=${OPENCONNECT_CA_ORG}
+      - CA_DAYS=${OPENCONNECT_CA_DAYS}
+      - SRV_CN=${OPENCONNECT_SRV_CN}
+      - SRV_ORG=${OPENCONNECT_SRV_ORG}
+      - SRV_DAYS=${OPENCONNECT_SRV_DAYS}
+      - NO_TEST_USER=${OPENCONNECT_NO_TEST_USER}
+  mtproto:
+    image: telegrammessenger/proxy:latest
+    container_name: mtproto
+    restart: always
+    ports:
+      - ${MTPROTO_PORT}:443
+    environment:
+      - SECRET_COUNT=${MTPROTO_SECRET_COUNT}
