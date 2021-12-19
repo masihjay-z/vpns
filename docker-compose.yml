@@ -21,7 +21,7 @@ services:
       - VPN_IPSEC_PSK=${L2TP_IPSEC_PSK}
       - VPN_USER_CREDENTIAL_LIST=${L2TP_USER_LIST}
   openconnect:
-    image: tommylau/ocserv:latest
+    image: quay.io/aminvakil/ocserv:latest
     container_name: openconnect
     restart: always
     privileged: true
