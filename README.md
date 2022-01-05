@@ -76,7 +76,7 @@ When prompt for password, type the password twice, then you will have the user w
 
 Delete user is similar to add user, just add another argument `-d` to the command line
 
-`docker exec -ti ocserv ocpasswd -c /etc/ocserv/ocpasswd -d test`
+`docker exec -ti openconnect ocpasswd -c /etc/ocserv/ocpasswd -d test`
 
 The above command will delete the default user `test`, if you start the instance without using environment variable `NO_TEST_USER`.
 
