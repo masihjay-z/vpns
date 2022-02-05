@@ -1,3 +1,4 @@
+version: '3'
 services:
   pptp:
     image: mmontagna/docker-vpn-pptp:latest
