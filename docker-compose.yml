@@ -45,3 +45,27 @@ services:
       - ${MTPROTO_PORT}:443
     environment:
       - SECRET_COUNT=${MTPROTO_SECRET_COUNT}
+
+  clash:
+    image: dreamacro/clash
+    volumes:
+      - ./config.yaml:/root/.config/clash/config.yaml
+    ports:
+      # - "xxxx:xxxx" # http port
+      # - "xxxx:xxxx" # socks port
+      - "6666:6666" # or mixed port
+      # If you need external controller, you can export this port.
+      # - "xxxx:xxxx"
+      - "7777:7777"
+    restart: always
+    # When your system is Linux, you can use `network_mode: "host"` directly.
+    network_mode: bridge
+    container_name: clash
+  yacd:
+    image: haishanh/yacd
+    ports:
+      # - "xxxx:80" # xxxx is the clash controller port specified in the config file
+      - "7000:80" 
+    restart: always
+    network_mode: bridge
+    container_name: yacd
